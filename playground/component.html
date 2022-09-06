@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--인스턴스 영역(#app)에 만든 컴포넌트 넣기-->
+    <div id="app">
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <div id="app2">
+        <app-header></app-header> <!--전역 컴포넌트-->
+        <app-footer></app-footer> <!--지역 컴포넌트-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 전역 컴포넌트 생성
+        // : 플러그인 or 라이브러리 형태로 전역으로 사용해야 하는 컴포넌트만 사용
+        // : 인스턴스를 생성할때마다 따로 등록할 필요 없이 기본적으로 적용
+        // Vue.component('컴포넌트 이름(태그)', 컴포넌트 내용);
+
+        // template ?
+        // : 컴포넌트가 표현되는 마크업이나 스타일(코드) = 화면에 표시되는 html
+        Vue.component('app-header', {
+            template: '<h1>Header</h1>'
+        });
+        Vue.component('app-content', {
+            template: '<div>content</div>'
+        });
+
+        //인스턴스를 생성하면 개발자 도구에서 Root 컴포넌트로 인식      
+        new Vue({
+            el: '#app',// 인스턴스를 생성해서 태그에 붙이겠다
+            // 지역 컴포넌트 생성
+            // : 인스턴스마다 새로 생성해줘야함
+            components: {
+                // '키' : '깂' --> 속성 등록 : 값 연결
+                // '컴포넌트 이름' : 컴포넌트 내용
+                'app-footer' : {
+                    template: '<footer>footer</footer>'
+                }
+            }
+        });
+
+        // 인스턴스는 여러개 생성 가능
+        // but 서비스 구현할때는 하나만 생성해도 무방
+        new Vue({
+            el:'#app2',
+            components: {
+                'app-footer' : {
+                    template: '<footer>footer</footer>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

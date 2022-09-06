@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // vm : vue model 약자
+        // 인스턴스 생성
+        let vm = new Vue({
+            // el : element 약자
+            el: '#app',
+            // app 이라는 id를 가진 태그를 찾아서 instance를 붙이겠다
+            // 붙이는 순간부터 div#app의 기능과 속성들이 유효해짐
+            data: {
+                message:'hi'
+            }
+        });
+
+        // 함수 첫글자가 대문자면 '생성자 함수' (ex. Person) ----------------------
+        // 생성자 함수 ?
+        // : 함수를 이용해서 어떤 정보를 담은 객체를 생성
+        function Person(name, job){
+            this.name = name;
+            this.job = job;
+        }
+        
+        let p = new Person ('josh','developer');
+
+        // --> p를 찍으면 
+        // --> Person {name:"josh", job:"developer"} 객체 뜸
+
+        // Vue를 생성자 함수 형태로 찍어야하는 이유 ? ----------------------------
+
+        function Vue(){
+            this.logText = function(){
+                console.log('hello');
+            }
+        } 
+        // --> 생성자 함수를 이용해 미리 logText라는 속성의 함수를 넣어놓음
+        
+        let vueModel = new Vue();
+        // --> vueModel 으로 new Vue라는 객체를 찍어낼때마다, 객체 안에는 미리 정의한 logText라는 함수가 들어가 있음
+        // --> 따라서, 매번 함수를 정의하는 것이 아니라, 미리 정의된 함수 재사용 가능
+        
+        // ==> so, 생성자 함수로 vue에서 api와 속성들을 전부 정의해 놓고, 갖다 쓰거나 재사용할 수 있음
+
+        // 인스턴스 옵션 --------------------------------------------------------
+
+        // 데이터인 객체를 변수에 할당하면 번거로움
+        // --> 객체 리터럴 사용
+        // : 객체를 통째로 안에 넣어주면 가독성이 더 좋음
+        // : ★ 생성자 안에 들어가는 인자는 "객체"가 들어가야 함! ★
+        let vmOptions = new Vue({
+            el: '#app',
+            data: {
+            message: 'Hello Vue.js'
+            },
+            methods:{
+
+            },
+            created: function(){
+
+            }
+        });
+        
+    </script>
+</body>
+</html>
