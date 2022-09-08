@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .warning {
+    color: red;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!--isError가 true면 warning이 들어가고, false면 들어가지 않음-->
+    <!--<p v-bind:class="{ warning: isError }">Hello</p>-->
+    
+    <!-- coumputed를 이용한 클래스 바인딩 -->
+    <p v-bind:class="errorTextColor">Hello</p>
+
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        // cname: 'blue-text',
+        isError: false
+      },
+      computed: {
+        errorTextColor: function() {
+          // if (isError) {
+          //   return 'warning'
+          // } else {
+          //   return null;
+          // }
+          return this.isError ? 'warning' : null;
+          // computed
+          // --> return 필수
+          // --> data 가져오려면 this. 필수
+        }
+      }
+    });
+  </script>
+</body>
+</html>

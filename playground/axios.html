@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Axios</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="getData">get user</button>
+    <div>
+      {{ users }}
+    </div>
+  </div>
+  <!--프론트엔드 개발자가 알아야한 HTTP 프로토콜
+    https://joshua1988.github.io/web-development/http-part1/
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        users: []
+      },
+      methods: {
+        getData: function() { 
+          var vm = this; // axios 호출 전 this : 기본적인 인스턴스, 컴포넌트
+          
+          axios.get('https://jsonplaceholder.typicode.com/users/')
+            .then(function(response) {
+              console.log(response.data);
+              vm.users = response.data;
+              // axios 호출 후 this
+              // : 비동기 처리 후 실행컨텍스트가 바뀌면서 this도 바뀜
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        }
+      }
+    })
+  </script>
+</body>
+</html>
